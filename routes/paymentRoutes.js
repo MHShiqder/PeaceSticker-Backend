@@ -12,7 +12,6 @@ router.post("/", async (req, res) => {
 
   try {
     const {price}=req.body;
-    
 
     const amount = Math.round(Number(price) * 100);
 

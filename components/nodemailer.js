@@ -13,14 +13,14 @@ export default async function sendEmail(newContact) {
   const mailOptions = {
   from: newContact.email,
   to: EMAIL_USER,
-  subject: `New Order Request from ${newContact.name}`,
+  subject: `New Order Request from ${newContact.firstName} ${newContact.lastName}`,
   html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
       <h2 style="color: #2b2b2b;">🛍️ New Order Submission</h2>
       <p>You have received a new order request from your website.</p>
       
       <h3 style="margin-top: 20px;">Customer Details</h3>
-      <p><strong>Name:</strong> ${newContact.name}</p>
+      <p><strong>Name:</strong>  ${newContact.firstName} ${newContact.lastName}</p>
       <p><strong>Email:</strong> ${newContact.email}</p>
       <p>
         <strong>Address:</strong><br>
