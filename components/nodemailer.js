@@ -7,12 +7,13 @@ const transporter = nodemailer.createTransport({
     user: EMAIL_USER,
     pass: GOOGLE_APP_PASSWORD,
   },
-});
+}); 
 
 export default async function sendEmail(newContact) {
   const mailOptions = {
   from: newContact.email,
-  to: EMAIL_USER,
+  // to: EMAIL_USER,
+  to: "hasib.softvence@gmail.com",
   subject: `New Order Request from ${newContact.firstName} ${newContact.lastName}`,
   html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
