@@ -3,6 +3,7 @@ import { connectDB } from "./config/db.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import sendAndSaveRoutes from "./routes/sendAndSaveRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 // import cors from "cors";
 
 const app = express();
@@ -26,8 +27,9 @@ app.use(express.json());
 
 // Routes
 app.use("/create-payment-intent-peace", paymentRoutes);
-app.use("/send-and-save", sendAndSaveRoutes);
+app.use("/orders", sendAndSaveRoutes);
 app.use("/contact", contactRoutes);
+app.use("/blogs", blogRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ Server running successfully!");

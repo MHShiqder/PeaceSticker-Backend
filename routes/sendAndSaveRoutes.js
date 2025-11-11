@@ -77,25 +77,40 @@ router.post("/", async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-  
   try {
     const db = getDB();
-    const contactCollection = db.collection("contacts");
+    const orderCollection = db.collection("contacts"); // or your orders collection
 
-    // Fetch all documents in the collection
-    const contacts = await contactCollection.find().sort({ date: -1 }).toArray();
+    const { lastOrderId } = req.query;
+
+    let filter = {};
+
+    if (lastOrderId) {
+      // First, find the order with this orderId to get its orderDate
+      const lastOrder = await orderCollection.findOne({ orderId: lastOrderId });
+
+      if (!lastOrder) {
+        return res.status(404).send({ error: "Order not found" });
+      }
+
+      // Filter for orders placed **after** the last order's date
+      filter = { orderDate: { $gt: lastOrder.orderDate } };
+    }
+
+    // Fetch orders sorted by date ascending (oldest first after the last order)
+    const orders = await orderCollection.find(filter).sort({ orderDate: -1 }).toArray();
 
     res.status(200).send({
-      message: "Data fetched successfully",
-      count: contacts.length,
-      data: contacts,
+      message: "Orders fetched successfully",
+      count: orders.length,
+      data: orders,
     });
   } catch (error) {
-    console.error("Error fetching contacts:", error);
-    res.status(500).send({ error: "Failed to fetch data" });
+    console.error("Error fetching orders:", error);
+    res.status(500).send({ error: "Failed to fetch orders" });
   }
-
 });
+
 
 
 

@@ -1,6 +1,5 @@
 import express from "express";
 import Stripe from "stripe";
-import sendEmail from "../components/nodemailer.js";
 import { STRIPE_SECRET_KEY } from "../config/env.js";
 
 
