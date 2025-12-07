@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
     items: [
       {
         productId: productDetails.productId,
-        productName: "daretodeclare kit",
+        productName: `${productDetails.quantity} daretodeclare kit`,
         quantity: productDetails.quantity,
         unitPrice: productDetails.unitPrice,
         totalItemPrice: price
